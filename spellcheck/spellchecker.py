@@ -5,7 +5,7 @@ import argparse
 from symspellpy import SymSpell, Verbosity
 import re
 
-class SpellCheck:
+class SpellChecker:
     def __init__(self, max_ed=2):
         self.nlp = spacy.blank("en")
         self.spellcheck_dict_fp = "spellcheck_dictionaries/spellcheck_dictionary.txt"

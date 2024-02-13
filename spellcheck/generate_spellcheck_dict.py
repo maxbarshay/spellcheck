@@ -3,8 +3,8 @@ import spacy
 import pickle
 import pandas as pd
 
-from spellchecker import load_data_into_list
-from spellchecker.spellcheck import SpellCheck
+from spellcheck import load_data_into_list
+from spellcheck.spellchecker import SpellChecker
 
 nlp = spacy.blank("en")
 
@@ -28,7 +28,7 @@ def generate_spellcheck_dictionary(data_folder, keep_proportion: float = 1) -> d
     vocab_dict = {}
     for i, row in data_4138.iterrows():
         text = row["TEXT"]
-        fixedup_text = SpellCheck.fixup_text(text.lower(), keep_punct=keep_chars, delete_punct=delete_chars)
+        fixedup_text = SpellChecker.fixup_text(text.lower(), keep_punct=keep_chars, delete_punct=delete_chars)
         alpha_tokens = [token.text for token in nlp.tokenizer(fixedup_text) if token.is_alpha]
         for alpha_token in alpha_tokens:
             if alpha_token not in vocab_dict:
