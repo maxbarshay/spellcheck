@@ -20,7 +20,7 @@ class SpellChecker:
         if not os.path.isfile(self.spellcheck_dict_fp):
             raise Exception("You must first generate the spellcheck dictionary by running `python spellchecker/generate_spellcheck_dict.py`")
 
-        speller = SymSpell(max_dictionary_edit_distance=self.max_ed, prefix_length=self.prefix_length, count_threshold=1)
+        speller = SymSpell(max_dictionary_edit_distance=self.max_ed, prefix_length=self.prefix_length)
         speller.load_dictionary(self.spellcheck_dict_fp, 0, 1)
 
         return speller
@@ -74,7 +74,7 @@ class SpellChecker:
         Returns:
             str: input or corrected text (if applicable)
         """        
-        auto_corrected = self.speller.lookup(token.text, Verbosity.TOP, max_edit_distance=self.edit_distance)
+        auto_corrected = self.speller.lookup(token.text, Verbosity.TOP, max_edit_distance=self.max_ed)
         if len(auto_corrected) == 1:
             return auto_corrected[0].term
         else:
