@@ -18,7 +18,7 @@ class SpellChecker:
         This method initializes the spellchecker with the pre-created dictionary.
         """
         if not os.path.isfile(self.spellcheck_dict_fp):
-            raise Exception("You must first generate the spellcheck dictionary by running `python spellchecker/generate_spellcheck_dict.py`")
+            raise Exception("You must first generate the spellcheck dictionary by running `python spellcheck/generate_spellcheck_dictionary.py`")
 
         speller = SymSpell(max_dictionary_edit_distance=self.max_ed, prefix_length=self.prefix_length)
         speller.load_dictionary(self.spellcheck_dict_fp, 0, 1)
@@ -121,7 +121,7 @@ class SpellChecker:
         return corrected_text, corrected_words
         
 if __name__ == "__main__":
-    text = "I need to add a depandant to my claim"
+    text = "To iscape his tarrible flailing, I siezzed hold of my polee stikcing in him."
     parser = argparse.ArgumentParser()
     parser.add_argument("-text", default=text)
     args = parser.parse_args()
