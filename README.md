@@ -9,7 +9,7 @@ poetry install
 ```
 
 ## Simple Test
-See the file `tests/test_spellchecker.py` for a simple test of the spellchecker. You can adjust the text in the test to see how the spellchecker behaves on different inputs. Don't forget to run `spellcheck/generate_dictionary.py` to generate the dictionary before running the test.
+See the file `tests/test_spellchecker.py` for a simple test of the spellchecker. You can adjust the text in the test to see how the spellchecker behaves on different inputs. Don't forget to run `python spellcheck/generate_dictionary.py` to generate the dictionary before running the test!
 
 ## Unit Tests
 To run 30 test corrections of the spellchecker, run the following command:
