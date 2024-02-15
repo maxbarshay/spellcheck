@@ -1,6 +1,5 @@
 import os
 import spacy
-import pickle
 import pandas as pd
 
 from spellcheck import load_data_into_list

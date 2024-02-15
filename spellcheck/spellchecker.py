@@ -26,7 +26,7 @@ class SpellChecker:
         return speller
     
     @staticmethod
-    def fixup_text(text:str, keep_punct:list=[], remove_punct:list=[], delete_punct:list=[]) -> str:
+    def fixup_text(text:str, keep_punct:list=[".", ","], remove_punct:list=[], delete_punct:list=[]) -> str:
         """Perform text preprocessing needed for spellcheck
         Args:
             text (str): text to preprocess
@@ -73,8 +73,10 @@ class SpellChecker:
             token (Token): spacy token (one word within the larger text)
         Returns:
             str: input or corrected text (if applicable)
-        """        
+        """
+        # Verbosity.TOP specifies that we want the top suggestion        
         auto_corrected = self.speller.lookup(token.text, Verbosity.TOP, max_edit_distance=self.max_ed)
+        # auto_corrected is either a list of length 1 (the best correction) or empty (no correction found)
         if len(auto_corrected) == 1:
             return auto_corrected[0].term
         else:
@@ -93,8 +95,10 @@ class SpellChecker:
             if token.is_alpha and len(token.text) > 3:
                 corrected_word = self.lookup_word(token)
                 corrected_text += corrected_word
+                # ensures whitespace is unmodified in correction
                 corrected_text += token.whitespace_
             else:
+                # ensures whitespace is unmodified in correction
                 corrected_text += token.text_with_ws
         return corrected_text
 

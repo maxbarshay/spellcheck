@@ -25,13 +25,16 @@ for i, row in df.iterrows():
 
 @pytest.mark.parametrize("test_name, original_word, true_word", testData, ids = testNames)
 def test_spellchecker(test_name, original_word, true_word):
-    preprocessed_word = spellchecker.correct_text(original_word)
+    fixedup_word = spellchecker.fixup_text(original_word)
+    spellchecked_word = spellchecker.correct_text(fixedup_word)
 
     print(f"{'Original Word:':18s} {original_word}")
-    print(f"Preprocessed Word: {preprocessed_word}")
+    if fixedup_word != original_word:
+        print(f"Fixedup Word: {fixedup_word}")
+    print(f"Spellchecked Word: {spellchecked_word}")
     print(f"{'True Word:':18s} {true_word}")
 
-    assert true_word == preprocessed_word
+    assert true_word == spellchecked_word
 
 
 if __name__ == "__main__":
